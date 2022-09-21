@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "~/my_libft/libft.h"
-/* #include <unistd.h>
+#include <unistd.h>
 
 #include <string.h>
-#include <stdio.h>*/
+#include <stdio.h>
 
 size_t  ft_strlcat(char * dst, const char * src, size_t dstsize)
 {
@@ -29,7 +28,7 @@ size_t  ft_strlcat(char * dst, const char * src, size_t dstsize)
         ++s;
     while(dst[d] != '\0')
         ++d;
-    if (d < dstsize|| dstsize != 0)
+    if (dstsize != 0 && d < dstsize)
     {
         while ((src[i] != '\0') && i < (dstsize - d - 1))
         {
@@ -38,8 +37,10 @@ size_t  ft_strlcat(char * dst, const char * src, size_t dstsize)
         }
         dst[d + i] = '\0';
     }
+    else if (d > dstsize)
+        return (s + dstsize);
     else
-        return (0);
+        return (s);
 	
     return (s + d);
 }
@@ -48,13 +49,13 @@ int main()
 {
 char	src[40] = "01234567890123456789";
 char	dst[40] = "abc";
-size_t	size = 20;
+size_t	size = 5;
 size_t	a = ft_strlcat(dst, src, size);
 printf("\nDel original '%s' con largo '%zu' se ha copiado '%s' con largo '%zu'.", src, a , dst, size);
 
 char	src_b[40] = "01234567890123456789";
 char	dst_b[40] = "abc";
-size_t	size_b = 20;
+size_t	size_b = 5;
 size_t 	b = strlcat(dst_b, src_b, size_b);
 printf("\nB_Del original '%s' con largo '%zu' se ha copiado '%s' con largo '%zu'.", src_b, b , dst_b, size_b);
 
