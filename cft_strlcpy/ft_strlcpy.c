@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
 #include <string.h>
 #include <stdio.h>
 
@@ -39,7 +41,7 @@ int main()
 {
 	char	src[21] = "01234567890123456789";
     char	dst[21] = "";
-    size_t	size = 4;
+    size_t	size = -4;
 	size_t	a = ft_strlcpy(dst, src, size);
 	printf("\nDel original '%s' con largo '%zu' se ha copiado '%s' con largo '%zu'.\n", src, a , dst, size);
     
