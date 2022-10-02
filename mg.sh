@@ -1,7 +1,6 @@
 #!/bin/sh
-name = $ 1
 git add .
-git commit -m {name}
+git commit -m $1
 git push
 git status
 git log
