@@ -9,7 +9,8 @@
 #    Updated: 2022/09/30 14:43:05 by caliaga-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-### 
+
+# Funciones reproducidas de la libreria lib c 
 F_P1 = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			   ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
 			   ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
