@@ -37,21 +37,21 @@ all: $(NAME)
 
 # Compile last modifications
 %.o: %.c $(H)
-    @gcc $(CFLAGS) -o $@ -c $<
+	@gcc $(CFLAGS) -o $@ -c $<
 
 # Compile as library
 $(NAME): $(OBJ_R) $(OBJ_C)
-    @ar rc $(NAME) $(OBJ_R) $(OBJ_C)
-    @ranlib $(NAME)
-    @echo "library $(NAME) created & indexed"
+	@ar rc $(NAME) $(OBJ_R) $(OBJ_C)
+	@ranlib $(NAME)
+	@echo "library $(NAME) created & indexed"
 
 clean: $(OBJ_R) $(OBJ_C)
 	@rm -fr $(OBJ_R) $(OBJ_C)
 	@echo "OBJECTS deleted"
 
 fclean: clean
-    @rm -fr $(NAME)
-    @echo "$(NAME) deleted"
+	@rm -fr $(NAME)
+	@echo "$(NAME) deleted"
 
 re: fclean all
 
