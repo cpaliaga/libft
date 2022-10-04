@@ -16,20 +16,23 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	unsigned int	i;
 	unsigned int	len;
-	char			*snew;
+	char			*new;
 
 	if (s == 0)
 		return (0);
-	len = ft_strlen(s);
+	len = 0;
+	while (*(s+len) != '\0')
+		len++;
 	i = 0;
-	snew = malloc((len + 1) * sizeof(char));
-	if (snew == 0)
+	new = malloc((len + 1) * sizeof(char));
+	if (new == 0)
 		return (0);
+	
 	while (i < len)
 	{
-		snew[i] = f(i, s[i]);
+		*(new + i) = f(i, *(s + i));
 		i++;
 	}
-	snew[i] = '\0';
-	return (snew);
+	*(new + i) = '\0';
+	return (new);
 }
