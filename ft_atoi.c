@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:25:51 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/04 16:11:23 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:10:51 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	ft_atoi(const char *str)
 		pointer++;
 	while (*pointer >= '0' && *pointer <= '9')
 	{
-		if (res > 0 && res * 10 + (*str - '0') < 0)
-			return (sign == 1 ? -1 : 0);
 		res = (res * 10) + (*pointer - '0');
 		pointer++;
 	}
