@@ -2,4 +2,8 @@ a.out
 .DS_Store
 *.o
 settings.json
+<<<<<<< HEAD
 libft.a
+=======
+warmachine
+>>>>>>> e3cd48a05ad4fe423ed54ab0a93e95f5bccadb73
