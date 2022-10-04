@@ -6,18 +6,18 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:34:48 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/01 16:37:45 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:34:11 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-    char		*d;
+	char		*d;
 	char		*lastd;
-    const char	*s;
-    const char	*lasts;
+	const char	*s;
+	const char	*lasts;
 
 	d = dst;
 	s = src;

@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:20:45 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:21:02 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:21:24 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	sjoin[i + j] = '\0';
 	return (sjoin);
 }
-

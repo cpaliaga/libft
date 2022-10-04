@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:48:37 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 15:48:48 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:32:40 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	while(len--)
+	while (len--)
 		*(unsigned char *)(b + len) = (unsigned char)c;
-	return(b);
+	return (b);
 }

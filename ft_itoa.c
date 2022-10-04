@@ -6,15 +6,15 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:07:28 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:08:05 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:25:19 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_size(int n)
+int	ft_size(int n)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	if (n == -2147483648)
@@ -61,4 +61,3 @@ char	*ft_itoa(int n)
 	}
 	return (s);
 }
-

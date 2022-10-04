@@ -6,15 +6,15 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:55:33 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 15:16:07 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:48:09 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int	c)
+int	ft_isprint(int c)
 {
-	if (c >= 32 && c <=126)
+	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);
 }

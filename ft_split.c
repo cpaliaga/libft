@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:24:10 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:53:39 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	ft_countword(char const *s, char c)
 
 static size_t	ft_countletter(char const *s, char c, size_t i)
 {
-	size_t j;
+	size_t	j;
 
 	j = 0;
 	while (s[i + j] != c && (i + j) < ft_strlen(s))
@@ -41,7 +41,7 @@ static size_t	ft_countletter(char const *s, char c, size_t i)
 	return (j);
 }
 
-static char		**ft_fillmatrix(char const *s, char c, char **matrix, size_t r)
+static char	**ft_fillmatrix(char const *s, char c, char **matrix, size_t r)
 {
 	size_t	j;
 	size_t	i;
@@ -54,7 +54,7 @@ static char		**ft_fillmatrix(char const *s, char c, char **matrix, size_t r)
 		else
 		{
 			j = ft_countletter(s, c, i);
-			matrix[r] = (char*)malloc((j + 1) * sizeof(char));
+			matrix[r] = (char *) malloc ((j + 1) * sizeof (char));
 			j = 0;
 			while (s[i] != c && i < ft_strlen(s))
 			{
@@ -70,18 +70,17 @@ static char		**ft_fillmatrix(char const *s, char c, char **matrix, size_t r)
 	return (matrix);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**matrix;
 	size_t	r;
 
 	if (s == 0)
 		return (0);
-	matrix = (char**)malloc((ft_countword(s, c) + 1) * sizeof(char*));
+	matrix = (char **) malloc ((ft_countword(s, c) + 1) * sizeof (char *));
 	r = 0;
 	if (matrix == 0)
 		return (0);
 	matrix = ft_fillmatrix(s, c, matrix, r);
 	return (matrix);
 }
-

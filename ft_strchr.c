@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:35:40 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 19:45:33 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:00:49 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 char	*ft_strchr(const char *s, int c)
 {
 	int	i;
-    int	len;
+	int	len;
 
 	len = 0;
 	while (*(s + len) != '\0')
 		len++;
-
 	i = 0;
 	if (c == '\0')
 		return ((char *) s + len);
-	
 	while (*(s + i) != '\0')
 	{
 		if (*(s + i) == (char)c)

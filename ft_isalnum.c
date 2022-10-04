@@ -6,17 +6,17 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:23:47 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 15:04:15 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:47:09 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isalnum(int	c)
+int	ft_isalnum(int c)
 {
-	if ((c >= 65 && c <=90) || (c >= 97 && c <= 122))
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
 		return (1);
-	else if(c >= 48  && c <= 57)
+	else if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }

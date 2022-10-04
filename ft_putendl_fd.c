@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:10:20 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:12:06 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:27:31 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putendl_fd(char *s, int fd)
 
 	i = 0;
 	if (s == 0)
-		return;
+		return ;
 	while (*(s + i) != '\0')
 	{
 		write(fd, (s + i), 1);

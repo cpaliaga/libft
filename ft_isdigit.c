@@ -6,15 +6,15 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:14:30 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 15:00:16 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:46:28 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int	c)
+int	ft_isdigit(int c)
 {
-	if (c >= 48  && c <= 57)
+	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }

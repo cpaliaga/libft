@@ -6,13 +6,13 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 14:41:24 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 19:32:42 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:16:26 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)
 		return (c + 32);

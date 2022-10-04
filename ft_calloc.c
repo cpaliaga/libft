@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:22:16 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:22:27 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:35:03 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*ft_calloc(size_t count, size_t size)
 	i = -1;
 	str = (char *)malloc(count * size);
 	if (str == 0)
-	return (0);
+		return (0);
 	while (++i < count * size)
-		*(str+i) = 0;
+		*(str + i) = 0;
 	return ((void *)str);
 }
