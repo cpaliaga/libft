@@ -22,5 +22,8 @@ int main()
 	ft_bzero(s3, n3);
 	printf("Cadena modificada con null '%zu' veces '%s' \n", n3, s3+n3);
 
+	char s4[] = "En un lugar de la Mancha de cuyo nombre no quiero acordarme";
+    ft_bzero(s4, 5);
+    printf("Cadena modificada con null veces '%s' \n", s3+5);
 	return(0);
 }
