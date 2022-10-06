@@ -6,16 +6,25 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:24:38 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/04 18:13:35 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/06 09:29:36 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+int	ft_w(size_t	h, char *hay, size_t n, char *need, size_t len)
+{
+	if ((*need + n) != '\0')
+		if ((h + n) < len)
+			if (*(hay + h + n) == *(need + n))
+				return (1);
+	return (0);
+}
+
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t	h;
+	size_t	n;
 	char	*hay;
 	char	*need;
 
@@ -23,18 +32,18 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	need = (char *)needle;
 	if (*need == '\0')
 		return (hay);
-	i = 0;
-	while (*(hay + i) != '\0')
+	h = 0;
+	while (*(hay + h) != '\0')
 	{
-		j = 0;
-		if (*(hay + i) == *need)
+		n = 0;
+		if (*(hay + h) == *need)
 		{
-			while (*((hay + i) + j) == *(need + j) && *(need + j) != '\0' && (j + i) < len)
-				j++;
-			if (need[j] == '\0')
-				return (hay + i);
+			while (ft_w(h, hay, n, need, len) == 1)
+				n++;
+			if (need[n] == '\0')
+				return (hay + h);
 		}
-		i++;
+		h++;
 	}
 	return (0);
 }
