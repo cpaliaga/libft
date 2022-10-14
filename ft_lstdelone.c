@@ -6,8 +6,16 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:38:18 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/14 14:38:22 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:52:04 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (!lst || !del)
+		return ;
+	(del)(lst->content);
+	free(lst);
+}

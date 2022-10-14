@@ -6,8 +6,21 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:37:18 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/14 14:37:19 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:44:03 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
