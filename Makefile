@@ -6,7 +6,7 @@
 #    By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 12:47:24 by caliaga-          #+#    #+#              #
-#    Updated: 2022/10/14 17:39:59 by caliaga-         ###   ########.fr        #
+#    Updated: 2022/10/15 13:52:11 by caliaga-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ OBJ_B = $(BONUS:.c=.o)
 
 # -I con esta flag configuramos la ruta de las cabeceras '.h' que necesitará el enlazador.
 INCLUDE = -I ./
-#LIBS  = libft.h
+LIBS  = ./libft.h
 
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
@@ -49,24 +49,27 @@ $(NAME): $(OBJ_R) $(OBJ_C)
 	@ranlib $(NAME)
 	@echo "library $(NAME) created & indexed"
 
+bonus: $(OBJ_R) $(OBJ_C) $(OBJ_B)
+	@ar rc $(NAME) $(OBJ_R) $(OBJ_C) $(OBJ_B)
+	@ranlib $(NAME)
+	@echo "library $(NAME) plus bonus created & indexed"
+
 %.o: %.c $(LIBS)
 	@gcc $(CFLAGS) -o $@ -c $< $(INCLUDE)
 
+#.c.o: $(LIBS) 
+#	@gcc ${FLAGS} -c $< -o ${<:.c=.o} $(INCLUDE)
+
 # Si se ponen dependencias a clean luego da problemas con los tester
 clean:
-	@rm -fr $(OBJ_R) $(OBJ_C)
+	@rm -fr $(OBJ_R) $(OBJ_C) $(OBJ_B)
 	@echo "OBJECTS deleted"
 
 fclean: clean
 	@rm -fr $(NAME)
 	@echo "$(NAME) deleted"
 
-re: fclean all
+re: fclean all bonus
 
-bonus: $(NAME) $(OBJ_R) $(OBJ_C) $(OBJ_B)
-	@ar rc $(NAME) $(OBJ_R) $(OBJ_C) $(OBJ_B)
-	@ranlib $(NAME)
-	@echo "library $(NAME) plus bonus created & indexed"
-
-.PHONY: all clean fclean re
+.PHONY: bonus all clean fclean re
 #### GENRAL ####
