@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/18 17:27:52 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:06:31 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,11 @@ static void *ft_freedom(char **matrix, size_t rows)
 
 static char	**ft_fillmatrix(char const *s, char c, char **matrix, size_t row)
 {
-	size_t	rows;
-	size_t	cols;
 	size_t	col;
 	size_t	i;
 
 	i = 0;
-	col = 0;
-	rows = ft_c_rows(s, c);
+	col = -1;
 	row = -1;
 	while (i < ft_strlen(s))
 	{
@@ -64,12 +61,11 @@ static char	**ft_fillmatrix(char const *s, char c, char **matrix, size_t row)
 			i++;
 		else
 		{
-			while(++row < rows)
+			while(++row < ft_c_rows(s, c))
 			{
-			   	while(col < ft_c_cols(s, c, i) || )
+			   	while(++col < ft_c_cols(s, c, i) || )
 				{
 					matrix[row][col] = *(s + i);
-					col++;
 					i++;
 				}
 				matrix[row][col] = '\0';
@@ -97,6 +93,7 @@ char	**ft_split(char const *s, char c)
 			ft_freedom(matrix,ft_c_rows(s, c))
 	        return (0);
 		}
+
 	}
 	row = 0;
 	matrix = ft_fillmatrix(s, c, matrix, row);
