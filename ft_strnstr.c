@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:24:38 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/15 20:35:33 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:51:55 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	nlen = ft_strlen(needle);
 	if (!*needle)
 		return ((char *)haystack);
-	while (*haystack != '\0' && len-- > 0)
+	while (*haystack != '\0' && len > 0)
 	{
 		if (*haystack == *needle)
 		{
@@ -29,6 +29,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 				return ((char *)haystack);
 		}
 		haystack++;
+		len--;
 	}
 	return (0);
 }
