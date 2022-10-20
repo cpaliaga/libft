@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/20 20:41:22 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:58:49 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	ft_freedom(char **split, size_t rows)
 	while (!rows)
 		free (split[rows--]);
 	free(split);
-	//return (split);
 }
 
 static char	*ft_word(const char *s, int a, int b, char **split)
