@@ -6,96 +6,79 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/18 20:06:31 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:41:22 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_c_rows(char const *s, char c)
+static size_t	ft_rows(char const *s, char c)
 {
-	size_t	count;
+	size_t	nb;
 
-	count = 1;
+	nb = 1;
 	while (*s)
 	{
 		if (*s == c)
 			if (*(s - 1) != c)
-				count += 1;
+				nb += 1;
 		s++;
 	}
-	return (count);
+	return (nb);
 }
 
-static size_t	ft_c_cols(char const *s, char c, size_t i)
-{
-	size_t	cols;
-
-	cols = 0;
-	while (*(s + i + cols) != c && (i + cols) < ft_strlen(s))
-		cols++;
-	return (cols);
-}
-
-static void *ft_freedom(char **matrix, size_t rows)
+static void	ft_freedom(char **split, size_t rows)
 {
 	while (!rows)
-	{
-		free(matrix + rows);
-		rows--;
-	}
-	free(matrix);
+		free (split[rows--]);
+	free(split);
+	//return (split);
 }
 
-static char	**ft_fillmatrix(char const *s, char c, char **matrix, size_t row)
+static char	*ft_word(const char *s, int a, int b, char **split)
 {
-	size_t	col;
-	size_t	i;
+	char	*word;
+	int		i;
 
 	i = 0;
-	col = -1;
-	row = -1;
-	while (i < ft_strlen(s))
+	word = (char *) malloc ((b - a + 1) * sizeof(char));
+	if (!word)
 	{
-		if (*(s + i) == c)
-			i++;
-		else
-		{
-			while(++row < ft_c_rows(s, c))
-			{
-			   	while(++col < ft_c_cols(s, c, i) || )
-				{
-					matrix[row][col] = *(s + i);
-					i++;
-				}
-				matrix[row][col] = '\0';
-				col = 0;
-			}
-		return (matrix);
+		ft_freedom(split, ft_rows(s, *(s + b + 1)));
+		return (NULL);
+	}
+	while (a < b)
+		word[i++] = s[a++];
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**matrix;
-	size_t	row;
+	size_t	i;
+	size_t	r;
+	int		alfa;
+	char	**split;
 
-	if (!s || !c)
+	if (!s)
 		return (NULL);
-	row = -1;
-	matrix = (char **) malloc (ft_c_rows(s, c) * sizeof (char *));
-	if (!matrix)
+	split = malloc ((ft_rows(s, c) + 1) * sizeof(char *));
+	if (!split)
 		return (NULL);
-	while (++row <= ft_c_rows(s, c))
+	i = 0;
+	r = 0;
+	alfa = -1;
+	while (i <= ft_strlen(s))
 	{
-	    matrix[row] = (char *)malloc((cols + 1) * sizeof(char*));
-	    if (!matrix[row])
+		if (*(s + i) != c && alfa < 0)
+			alfa = i;
+		else if ((*(s + i) == c || i == ft_strlen(s)) && alfa >= 0)
 		{
-			ft_freedom(matrix,ft_c_rows(s, c))
-	        return (0);
+			split[r++] = ft_word(s, alfa, i, split);
+			alfa = -1;
 		}
-
+		i++;
 	}
-	row = 0;
-	matrix = ft_fillmatrix(s, c, matrix, row);
-	return (matrix);
+	split[r] = 0;
+	return (split);
 }
