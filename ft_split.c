@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/20 21:58:49 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:50:51 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,67 +17,83 @@ static size_t	ft_rows(char const *s, char c)
 	size_t	nb;
 
 	nb = 1;
+	while (*s == c)
+		s++;
 	while (*s)
 	{
-		if (*s == c)
-			if (*(s - 1) != c)
+		if (*s == c && *(s - 1) != c)
 				nb += 1;
 		s++;
 	}
 	return (nb);
 }
 
-static void	ft_freedom(char **split, size_t rows)
+char	*ft_word(char *word, char const *s, int k, int cols)
 {
-	while (!rows)
-		free (split[rows--]);
-	free(split);
-}
-
-static char	*ft_word(const char *s, int a, int b, char **split)
-{
-	char	*word;
 	int		i;
 
 	i = 0;
-	word = (char *) malloc ((b - a + 1) * sizeof(char));
-	if (!word)
-	{
-		ft_freedom(split, ft_rows(s, *(s + b + 1)));
-		return (NULL);
-	}
-	while (a < b)
-		word[i++] = s[a++];
+	while (cols > 0)
+		word[i++] = s[k - cols--];
 	word[i] = '\0';
 	return (word);
 }
 
+void	ft_aux(const char *s, char c, size_t *k, size_t *cols)
+{
+	while (s[*k] == c)
+		(*k)++;
+	while (s[*k] != c)
+	{
+		(*k)++;
+		(*cols)++;
+	}
+}
+
+char	**ft_split2(char const *s, char c, char **split, size_t rows)
+{
+	size_t	k;
+	size_t	cols;
+	size_t	row;
+
+	row = 0;
+	cols = 0;
+	k = 0;
+	while (s[k] && row < rows)
+	{
+		ft_aux(s, c, &k, &cols);
+		split[row] = (char *)malloc(sizeof(char) * (cols + 1));
+		if (!split[row])
+		{
+			while (row-- >= 0)
+				free(split[row]);
+			free(split);
+			return (NULL);
+		}
+		ft_word(split[row], s, k, cols);
+		cols = 0;
+		row++;
+	}
+	split[row] = 0;
+	return (split);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	r;
-	int		alfa;
+	size_t	row;
+	size_t	rows;
 	char	**split;
 
-	if (!s)
+	row = 0;
+	rows = ft_rows(s, c);
+	if (s == 0)
 		return (NULL);
-	split = malloc ((ft_rows(s, c) + 1) * sizeof(char *));
+	split = (char **) malloc (sizeof(char *) * (rows + 1));
 	if (!split)
-		return (NULL);
-	i = 0;
-	r = 0;
-	alfa = -1;
-	while (i <= ft_strlen(s))
 	{
-		if (*(s + i) != c && alfa < 0)
-			alfa = i;
-		else if ((*(s + i) == c || i == ft_strlen(s)) && alfa >= 0)
-		{
-			split[r++] = ft_word(s, alfa, i, split);
-			alfa = -1;
-		}
-		i++;
+		free(split);
+		return (NULL);
 	}
-	split[r] = 0;
+	ft_split2(s, c, split, rows);
 	return (split);
 }
