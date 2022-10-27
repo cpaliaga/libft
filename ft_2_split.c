@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/27 15:59:28 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:50:51 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,55 +28,72 @@ static size_t	ft_rows(char const *s, char c)
 	return (nb);
 }
 
-void	ft_cols(char *ss, size_t *cols, char c)
+char	*ft_word(char *word, char const *s, int k, int cols)
 {
-	while (*ss == c && ss != '\0')
-		(*ss)++;
-	while (*ss != c && ss != '\0')
+	int		i;
+
+	i = 0;
+	while (cols > 0)
+		word[i++] = s[k - cols--];
+	word[i] = '\0';
+	return (word);
+}
+
+void	ft_aux(const char *s, char c, size_t *k, size_t *cols)
+{
+	while (s[*k] == c)
+		(*k)++;
+	while (s[*k] != c)
 	{
-		(*ss)++;
+		(*k)++;
 		(*cols)++;
 	}
 }
 
-static char	**ft_check(char **split)
-{	
-	size_t	i;
+char	**ft_split2(char const *s, char c, char **split, size_t rows)
+{
+	size_t	k;
+	size_t	cols;
+	size_t	row;
 
-	i = 0;
-	while (split[i])
+	row = 0;
+	cols = 0;
+	k = 0;
+	while (s[k] && row < rows)
 	{
-		free(split[i]);
-		i++;
+		ft_aux(s, c, &k, &cols);
+		split[row] = (char *)malloc(sizeof(char) * (cols + 1));
+		if (!split[row])
+		{
+			while (row-- >= 0)
+				free(split[row]);
+			free(split);
+			return (NULL);
+		}
+		ft_word(split[row], s, k, cols);
+		cols = 0;
+		row++;
 	}
-	free(split);
-	return (NULL);
+	split[row] = 0;
+	return (split);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	size_t	row;
-	size_t	cols;
-	char	*ss;
+	size_t	rows;
 	char	**split;
 
 	row = 0;
-	cols = 0;
-	ss = (char *)s;
-	if (!s)
+	rows = ft_rows(s, c);
+	if (s == 0)
 		return (NULL);
-	split = (char **) malloc (sizeof(char *) * (ft_rows(s, c) + 1));
+	split = (char **) malloc (sizeof(char *) * (rows + 1));
 	if (!split)
-		return (NULL);
-	while (row < ft_rows(s, c))
 	{
-		ft_cols(ss, &cols, c);
-		split[row] = (char *)malloc(sizeof(char) * (cols + 1));
-		if (!split[row])
-			return (ft_check(split));
-		ft_strlcpy(split[row], ss, cols + 1);
-		row++;
+		free(split);
+		return (NULL);
 	}
-	split[row] = 0;
+	ft_split2(s, c, split, rows);
 	return (split);
 }
