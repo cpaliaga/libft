@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:51:29 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/09/27 15:54:12 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/10/28 13:57:45 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	while (n--)
-		*(unsigned char *)(s++) = 0;
+	char	*mem;
+
+	mem = s;
+	while (n-- > 0)
+		*mem++ = '\0';
 }
