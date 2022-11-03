@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/11/03 13:58:08 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:58:02 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static size_t	*ft_rows(char const *s, char c, size_t *rows)
 	i = -1;
 	k = -1;
 	f = malloc (nb * sizeof(size_t));
+	if (!f)
+		return (NULL);
 	while (s[++i] != '\0')
 		if (s[i] != c)
 			if (i==0 || s[i -1] == c)
@@ -36,53 +38,68 @@ static size_t	*ft_rows(char const *s, char c, size_t *rows)
 	return (f);
 }
 
-static void	ft_cols(const char *s, char c, size_t start, size_t *cols)
+static char *ft_cols(const char *s, char c, size_t start)
 {
-	size_t	nb;
+	size_t	cols;
+	size_t	k;
+	char    *f;
+	size_t	i;
 
-	nb = 0;
-	while (s[start] != c && s[start] != '\0')
+	k = start;
+	cols = 0;
+	while (s[k] != c && s[k] != '\0')
 	{
-		start++;
-		nb++;
+	    cols++;
+		k++;
 	}
-	*cols = nb;
+	i = 0;
+	k = start;
+	f = malloc ((cols + 1) * sizeof(char));
+	if (!f)
+	    return (NULL);
+	while (s[k] != c && s[k] != '\0')
+	    f[i++] = s[k++];
+	f[i] = '\0';
+	return (f);
 }
 
-static void	ft_check(char **split, size_t row)
+static char	**ft_check(char **split, size_t row)
 {
 	while (row-- > 0)
-	{
-		free(split[row]);
+	{	
+		if(split[row])
+			free(split[row]);
 	}
-	free(split);
+	if (split)
+		free(split);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	size_t	rows;
 	size_t	row;
-	size_t	cols;
 	size_t	*starts;
 	char	**split;
 
 	starts = ft_rows(s,c,&rows);
+	if (!starts)
+		return (0);
 	row = 0;
 	if (!s)
 		return (NULL);
-	split = (char **) malloc ((rows + 1) * sizeof(char));
+	split = (char **) malloc ((rows + 1) * sizeof(char*));
 	if (!split)
 		return (NULL);
 	while (row < rows)
 	{
-		ft_cols(s, c, starts[row], &cols);
-		split[row] = ft_substr(s, starts[row], cols);
+		split[row] = ft_cols(s, c, starts[row]);
 		if (!split[row])
-			ft_check(split, row);
-		if (!split[row])
-			return (NULL);	
+			return (ft_check(split, row));
 		row++;
 	}
 	split[row] = 0;
+	if (starts)
+		free(starts);
 	return (split);
 }
