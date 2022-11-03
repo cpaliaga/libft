@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/11/03 17:58:02 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:05:19 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static size_t	*ft_rows(char const *s, char c, size_t *rows)
 	while (s[++i] != '\0')
 		if (s[i] != c)
 			if (i==0 || s[i -1] == c)
-				 f[++k] = i;
+				f[++k] = i;
 	return (f);
 }
 
