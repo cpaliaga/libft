@@ -6,7 +6,7 @@
 #    By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 12:47:24 by caliaga-          #+#    #+#              #
-#    Updated: 2022/11/08 12:49:51 by caliaga-         ###   ########.fr        #
+#    Updated: 2022/11/08 13:34:15 by caliaga-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
 #### REGLAS ####
-
 all: $(NAME)
 
 # Compilación de la librería '.a'
@@ -48,17 +47,12 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo "library $(NAME) created & indexed"
 
-bonus: $(OBJ_B)
+bonus: $(OBJ) $(OBJ_B)
 	@ar rc $(NAME) $(OBJ) $(OBJ_B)
 	@ranlib $(NAME)
 	@echo "library $(NAME) plus bonus created & indexed"
 
 #	make "OBJ = $(BONUS:.c=.o)"
-#%.o: %.c $(LIBS)
-#	@gcc $(CFLAGS) -o $@ -c $< $(INCLUDE)
-
-#.c.o: $(LIBS) 
-#	@gcc ${FLAGS} -c $< -o ${<:.c=.o} $(INCLUDE)
 
 # Si se ponen dependencias a clean luego da problemas con los tester
 clean:
@@ -73,4 +67,3 @@ fclean: clean
 re: fclean all bonus
 
 .PHONY: bonus all clean fclean re
-#### GENRAL ####
