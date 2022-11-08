@@ -6,7 +6,7 @@
 #    By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 12:47:24 by caliaga-          #+#    #+#              #
-#    Updated: 2022/10/15 13:52:11 by caliaga-         ###   ########.fr        #
+#    Updated: 2022/11/08 12:34:21 by caliaga-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,8 @@ BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 
 # Variables de objetos binarios '.o' que se han complilado 
 # a raíz de código fuente '.c' / Objects
-OBJ_R = $(REPRO:.c=.o)
-OBJ_C = $(CUSTOM:.c=.o)
-OBJ_B = $(BONUS:.c=.o)
+OBJ = $(REPRO:.c=.o) $(CUSTOM:.c=.o)
+# OBJ_B = $(BONUS:.c=.o)
 
 # -I con esta flag configuramos la ruta de las cabeceras '.h' que necesitará el enlazador.
 INCLUDE = -I ./
@@ -44,25 +43,27 @@ NAME = libft.a
 all: $(NAME)
 
 # Compilación de la librería '.a'
-$(NAME): $(OBJ_R) $(OBJ_C)
-	@ar rc $(NAME) $(OBJ_R) $(OBJ_C)
+$(NAME): $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "library $(NAME) created & indexed"
 
-bonus: $(OBJ_R) $(OBJ_C) $(OBJ_B)
-	@ar rc $(NAME) $(OBJ_R) $(OBJ_C) $(OBJ_B)
-	@ranlib $(NAME)
+bonus: $(OBJ_B)
+	make "OBJ = $(BONUS:.c=.o)"
+#	@ar rc $(NAME) $(OBJ_R) $(OBJ_C) $(OBJ_B)
+#	@ranlib $(NAME)
 	@echo "library $(NAME) plus bonus created & indexed"
 
-%.o: %.c $(LIBS)
-	@gcc $(CFLAGS) -o $@ -c $< $(INCLUDE)
+#%.o: %.c $(LIBS)
+#	@gcc $(CFLAGS) -o $@ -c $< $(INCLUDE)
 
 #.c.o: $(LIBS) 
 #	@gcc ${FLAGS} -c $< -o ${<:.c=.o} $(INCLUDE)
 
 # Si se ponen dependencias a clean luego da problemas con los tester
 clean:
-	@rm -fr $(OBJ_R) $(OBJ_C) $(OBJ_B)
+	@rm -fr $(REPRO:.c=.o) $(CUSTOM:.c=.o) $(BONUS:.c=.o)
+#	@rm -fr $(OBJ_R) $(OBJ_C) $(OBJ_B)
 	@echo "OBJECTS deleted"
 
 fclean: clean
