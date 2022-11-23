@@ -6,59 +6,66 @@
 #    By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 12:47:24 by caliaga-          #+#    #+#              #
-#    Updated: 2022/11/08 13:34:15 by caliaga-         ###   ########.fr        #
+#    Updated: 2022/11/23 14:49:52 by caliaga-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #### MACROS / VARIABLES ####
 
 # Variables de archivos de código fuente '.c' / Sources.
-REPRO = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-			   ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
-			   ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-			   ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
-			   ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
-			   ft_atoi.c ft_calloc.c ft_strdup.c
-CUSTOM = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
-			   ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
-			   ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-		ft_lstmap.c
+SRC_DIR = ./
+SRC_FILES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
+		ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
+		ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
+		ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
+		ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
+		ft_atoi.c ft_calloc.c ft_strdup.c \
+		ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
+		ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
+		ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
-# Variables de objetos binarios '.o' que se han complilado 
-# a raíz de código fuente '.c' / Objects
-OBJ = $(REPRO:.c=.o) $(CUSTOM:.c=.o)
+BONUS_DIR = ./
+BONUS_FILES = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c \
+		ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
+		ft_lstmap_bonus.c
+BONUS = $(addprefix $(BONUS_DIR), $(BONUS_FILES))
+
+INC_DIR = ./
+INC_FILES = libft.h
+LIB = $(addprefix $(INC_DIR), $(INC_FILES))
+
+OBJ = $(SRC:.c=.o)
 OBJ_B = $(BONUS:.c=.o)
-
-# -I con esta flag configuramos la ruta de las cabeceras '.h' que necesitará el enlazador.
-INCLUDE = -I ./
-LIBS  = ./libft.h
 
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
+HIDE = .
 
 #### REGLAS ####
 all: $(NAME)
 
-# Compilación de la librería '.a'
+bonus: $(HIDE)
+	
+$(HIDE): $(OBJ) $(OBJ_B)
+	ar crs $(NAME) $(OBJ) $(OBJ_B)
+	ranlib $(NAME)
+	echo "library $(NAME) plus bonus created & indexed"
+
 $(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@echo "library $(NAME) created & indexed"
+	ar crs $(NAME) $(OBJ)
+	ranlib $(NAME)
+	echo "library $(NAME) created & indexed"
 
-bonus: $(OBJ) $(OBJ_B)
-	@ar rc $(NAME) $(OBJ) $(OBJ_B)
-	@ranlib $(NAME)
-	@echo "library $(NAME) plus bonus created & indexed"
+$(filter-out %.o, $(SRC)): $(filter-out %.c, $(SRC))
+	gcc $(CFLAGS) -I$(INC_DIR) -c $^ -o $@
 
-#	make "OBJ = $(BONUS:.c=.o)"
+$(filter-out %.o, $(BONUS)): $(filter-out %.c, $(BONUS))
+	gcc $(CFLAGS) -I$(INC_DIR) -c $^ -o $@
 
-# Si se ponen dependencias a clean luego da problemas con los tester
 clean:
-	@rm -fr $(REPRO:.c=.o) $(CUSTOM:.c=.o) $(BONUS:.c=.o)
-#	@rm -fr $(OBJ_R) $(OBJ_C) $(OBJ_B)
-	@echo "OBJECTS deleted"
+	rm -fr $(SRC:.c=.o) $(BONUS:.c=.o)
+	echo "OBJECTS deleted"
 
 fclean: clean
 	@rm -fr $(NAME)
