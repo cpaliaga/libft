@@ -6,48 +6,36 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:23:25 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/11/29 14:15:33 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:29:11 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_rows(char const *s, char c, size_t *row)
+static size_t	*ft_rows(char const *s, char c, size_t *rows)
 {
 	size_t	nb;
 	size_t	i;
+	size_t	k;
+	size_t	*f;
 
-	row = 0;
-	if (!s)
-		return (0);
 	i = -1;
 	nb = 0;
 	while (s[++i] != '\0')
 		if (s[i] != c)
 			if (i == 0 || s[i - 1] == c)
 				nb++;
-	return(nb);
-}
-
-static size_t *ft_starts(const char *s, char c,  size_t *rows, size_t *starts)
-{
-	size_t	i;
-	size_t	nb;
-	size_t	*f;
-
+	*rows = nb;
 	i = -1;
-	nb = -1;
-	if (!starts)
-	{
-		free(starts);
+	k = -1;
+	f = malloc (nb * sizeof(size_t));
+	if (!f)
 		return (NULL);
-	}
-	f = starts;
 	while (s[++i] != '\0')
 		if (s[i] != c)
 			if (i == 0 || s[i - 1] == c)
-				f[++nb] = i;
-	return(f);
+				f[++k] = i;
+	return (f);
 }
 
 static char	*ft_cols(const char *s, char c, size_t start)
@@ -94,9 +82,12 @@ char	**ft_split(char const *s, char c)
 	size_t	*starts;
 	char	**split;
 
-	rows = ft_rows(s,c, &row);
-	starts = malloc (rows * sizeof(size_t));
-	starts = ft_starts(s, c, starts);
+	starts = ft_rows(s, c, &rows);
+	if (!starts)
+		return (0);
+	row = 0;
+	if (!s)
+		return (NULL);
 	split = (char **) malloc ((rows + 1) * sizeof(char *));
 	if (!split)
 		return (NULL);
@@ -108,6 +99,7 @@ char	**ft_split(char const *s, char c)
 		row++;
 	}
 	split[row] = 0;
-	free(starts);
+	if (starts)
+		free(starts);
 	return (split);
 }

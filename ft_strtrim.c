@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:25:12 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/04 16:22:09 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:00:06 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (start == ft_strlen(s1))
 	{
 		strim = malloc(1 * sizeof(char));
+		if (!strim)
+			return (0);
 		strim[0] = '\0';
 	}
 	else
