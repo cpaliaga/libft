@@ -6,7 +6,7 @@
 /*   By: caliaga- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:22:16 by caliaga-          #+#    #+#             */
-/*   Updated: 2022/10/28 17:32:26 by caliaga-         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:07:35 by caliaga-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	len;
 
 	len = (count * size);
+	if (len < count && len < size)
+		return (NULL);
 	if (len > SIZE_MAX)
 		return (NULL);
 	str = malloc(len);
